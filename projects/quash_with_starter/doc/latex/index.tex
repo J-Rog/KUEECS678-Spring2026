@@ -1,5 +1,5 @@
 \begin{quote}
-\section*{E\+E\+CS 678 -\/ Project 1 -\/ Quash Shell}
+\section*{E\+E\+CS 678 -\/ Quash Shell}
 
 \end{quote}
 
@@ -41,7 +41,7 @@ or \begin{quote}
 
 \subsection*{Features}
 
-{\itshape {\bfseries The main file you will modify is \hyperlink{execute_8c}{src/execute.\+c}. You may not use or modify files in the src/parsing directory, with the notable exception of the \hyperlink{parsing__interface_8h_a659361d40550d9776b6ea7fa69a836ce}{destroy\+\_\+parser()} function in src/parsing/parse\+\_\+interface.\+c if necessary. Your output should match our example result files exactly.}}
+{\itshape {\bfseries The main file you will modify is \hyperlink{execute_8c}{src/execute.\+c}. You may not use or modify files in the src/parsing directory, with the notable exception of the destroy\+\_\+parser() function in src/parsing/parse\+\_\+interface.\+c if necessary. Your output should match our example result files exactly.}}
 
 The following features should be implemented in Quash\+:
 
@@ -59,11 +59,11 @@ The following features should be implemented in Quash\+:
 
 
 \begin{DoxyCode}
-1 [QUASH]$ program1 &
-2 Background job started: [1]    2342    program1 &
-3 [QUASH]$ ls
-4 Documents Downloads
-5 Completed: [1]    2342    program1 &
+[QUASH]$ program1 &
+Background job started: [1]    2342    program1 &
+[QUASH]$ ls
+Documents Downloads
+Completed: [1]    2342    program1 &
 \end{DoxyCode}
 
 
@@ -74,24 +74,24 @@ The following features should be implemented in Quash\+:
 
 
 \begin{DoxyCode}
-1 [QUASH]$ echo Hello Quash! > a.txt  # Write "Hello Quash!\(\backslash\)n" to a file
-2 [QUASH]$ cat a.txt
-3 Hello Quash!
-4 [QUASH]$ echo Hey Quash! > a.txt  # Truncate the previous contents of a.txt and write "Hey Quash!\(\backslash\)n" to the
+[QUASH]$ echo Hello Quash! > a.txt  # Write "Hello Quash!\(\backslash\)n" to a file
+[QUASH]$ cat a.txt
+Hello Quash!
+[QUASH]$ echo Hey Quash! > a.txt  # Truncate the previous contents of a.txt and write "Hey Quash!\(\backslash\)n" to the
        file
-5 [QUASH]$ cat a.txt          # Print file contents. If we didn't actually truncate we would see "Hey
+[QUASH]$ cat a.txt          # Print file contents. If we didn't actually truncate we would see "Hey
        Quash!h!\(\backslash\)n" as the output of this command.
-6 Hey Quash!
-7 [QUASH]$ cat < a.txt        # Make cat read from a.txt via standard in
-8 Hey Quash!
-9 [QUASH]$ cat < a.txt > b.txt  # Multiple redirect. Read from a.txt and write to b.txt.
-10 [QUASH]$ cat b.txt
-11 Hey Quash!
-12 [QUASH]$ cat a.txt >> b.txt  # Append output of a.txt to b.txt
-13 [QUASH]$ cat b.txt
-14 Hey Quash!
-15 Hey Quash!
-16 [QUASH]$
+Hey Quash!
+[QUASH]$ cat < a.txt        # Make cat read from a.txt via standard in
+Hey Quash!
+[QUASH]$ cat < a.txt > b.txt  # Multiple redirect. Read from a.txt and write to b.txt.
+[QUASH]$ cat b.txt
+Hey Quash!
+[QUASH]$ cat a.txt >> b.txt  # Append output of a.txt to b.txt
+[QUASH]$ cat b.txt
+Hey Quash!
+Hey Quash!
+[QUASH]$
 \end{DoxyCode}
 
 
@@ -102,14 +102,14 @@ The following features should be implemented in Quash\+:
 
 
 \begin{DoxyCode}
-1 [QUASH]$ cat src/quash.c | grep running
-2 // Check if loop is running
-3 bool is\_running() \{
-4   return state.running;
-5   state.running = false;
-6   while (is\_running()) \{
-7 [QUASH]$ cat src/quash.c | grep running | grep return
-8   return state.running;
+[QUASH]$ cat src/quash.c | grep running
+// Check if loop is running
+bool is\_running() \{
+  return state.running;
+  state.running = false;
+  while (is\_running()) \{
+[QUASH]$ cat src/quash.c | grep running | grep return
+  return state.running;
 \end{DoxyCode}
 
 
@@ -124,11 +124,11 @@ All built-\/in commands should be implemented in quash itself. They cannot be ex
 
 
 \begin{DoxyCode}
-1 [QUASH]$ echo Hello world! 'How are you today?'
-2 Hello world! How are you today?
-3 [QUASH]$ echo $HOME/Development
-4 /home/jrobinson/Development
-5 [QUASH]$
+[QUASH]$ echo Hello world! 'How are you today?'
+Hello world! How are you today?
+[QUASH]$ echo $HOME/Development
+/home/jrobinson/Development
+[QUASH]$
 \end{DoxyCode}
 
 
@@ -139,15 +139,15 @@ All built-\/in commands should be implemented in quash itself. They cannot be ex
 
 
 \begin{DoxyCode}
-1 [QUASH]$ export PATH=/usr/bin:/bin  # Set the PATH environment variable
-2 [QUASH]$ echo $PATH                 # Print the current value of PATH
-3 /usr/bin:/bin
-4 [QUASH]$ echo $HOME
-5 /home/jrobinson
-6 [QUASH]$ export PATH=$HOME  # Set the PATH environment variable to the value of HOME
-7 [QUASH]$ echo $PATH         # Print the current value of PATH
-8 /home/jrobinson
-9 [QUASH]$
+[QUASH]$ export PATH=/usr/bin:/bin  # Set the PATH environment variable
+[QUASH]$ echo $PATH                 # Print the current value of PATH
+/usr/bin:/bin
+[QUASH]$ echo $HOME
+/home/jrobinson
+[QUASH]$ export PATH=$HOME  # Set the PATH environment variable to the value of HOME
+[QUASH]$ echo $PATH         # Print the current value of PATH
+/home/jrobinson
+[QUASH]$
 \end{DoxyCode}
 
 
@@ -158,14 +158,14 @@ All built-\/in commands should be implemented in quash itself. They cannot be ex
 
 
 \begin{DoxyCode}
-1 [QUASH]$ echo $PWD
-2 /home/jrobinson
-3 [QUASH]$ cd ..              # Go up one directory
-4 [QUASH]$ echo $PWD
-5 /home
-6 [QUASH]$ cd $HOME           # Go to path in the HOME environment variable
-7 /home/jrobinson
-8 [QUASH]$
+[QUASH]$ echo $PWD
+/home/jrobinson
+[QUASH]$ cd ..              # Go up one directory
+[QUASH]$ echo $PWD
+/home
+[QUASH]$ cd $HOME           # Go to path in the HOME environment variable
+/home/jrobinson
+[QUASH]$
 \end{DoxyCode}
 
 
@@ -176,16 +176,16 @@ All built-\/in commands should be implemented in quash itself. They cannot be ex
 
 
 \begin{DoxyCode}
-1 [QUASH]$ pwd                # Print the working directory
-2 /home/jrobinson
-3 [QUASH]$ echo $PWD          # Print the PWD environment variable
-4 /home/jrobinson
-5 [QUASH]$ export PWD=/usr    # Change the PWD environment variable
-6 [QUASH]$ pwd
-7 /home/jrobinson
-8 [QUASH]$ echo $PWD
-9 /usr
-10 [QUASH]$
+[QUASH]$ pwd                # Print the working directory
+/home/jrobinson
+[QUASH]$ echo $PWD          # Print the PWD environment variable
+/home/jrobinson
+[QUASH]$ export PWD=/usr    # Change the PWD environment variable
+[QUASH]$ pwd
+/home/jrobinson
+[QUASH]$ echo $PWD
+/usr
+[QUASH]$
 \end{DoxyCode}
 
 
@@ -196,13 +196,13 @@ All built-\/in commands should be implemented in quash itself. They cannot be ex
 
 
 \begin{DoxyCode}
-1 [BASH]$ ./quash
-2 Welcome...
-3 [QUASH]$ exit
-4 [BASH]$ ./quash
-5 Welcome...
-6 [QUASH]$ quit
-7 [BASH]$
+[BASH]$ ./quash
+Welcome...
+[QUASH]$ exit
+[BASH]$ ./quash
+Welcome...
+[QUASH]$ quit
+[BASH]$
 \end{DoxyCode}
 
 
@@ -213,14 +213,14 @@ All built-\/in commands should be implemented in quash itself. They cannot be ex
 
 
 \begin{DoxyCode}
-1 [QUASH]$ find -type f | grep '*.c' > out.txt &
-2 Background job started: [1]    2342    find / -type f | grep '*.c' > out.txt &
-3 [QUASH]$ sleep 15 &
-4 Background job started: [2]    2343    sleep 15 &
-5 [QUASH]$ jobs               # List currently running background jobs
-6 [1]    2342    find / -type f | grep '*.c' > out.txt &
-7 [2]    2343    sleep 15 &
-8 [QUASH]$
+[QUASH]$ find -type f | grep '*.c' > out.txt &
+Background job started: [1]    2342    find / -type f | grep '*.c' > out.txt &
+[QUASH]$ sleep 15 &
+Background job started: [2]    2343    sleep 15 &
+[QUASH]$ jobs               # List currently running background jobs
+[1]    2342    find / -type f | grep '*.c' > out.txt &
+[2]    2343    sleep 15 &
+[QUASH]$
 \end{DoxyCode}
 
 
@@ -231,30 +231,30 @@ The following are some funtions outside of \hyperlink{execute_8c}{src/execute.\+
 
 \begin{DoxyItemize}
 \item {\itshape \hyperlink{quash_8c_ab43880685b2507434e4a84f2cb9d54d4}{get\+\_\+command\+\_\+string()}} 
-\item {\itshape \hyperlink{parsing__interface_8h_a659361d40550d9776b6ea7fa69a836ce}{destroy\+\_\+parser()}} 
+\item {\itshape destroy\+\_\+parser()} 
 \item Things in \hyperlink{deque_8h}{src/deque.\+h}. Quash can make due with only implementations of this data structure (i.\+e. background jobs list, process id list). These are preprocessor macro definitions of the data structure and will expand and specialize to a type when used (similar to templates in c++). See example usage at the bottom of \hyperlink{deque_8h}{src/deque.\+h}. {\bfseries You don\textquotesingle{}t have to use this deque implementation if you would rather write your own list data structure.}
 \begin{DoxyItemize}
-\item {\itshape \hyperlink{deque_8h_ad1734634a88d702478c08e26e39dc7b8}{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+Q\+U\+E\+\_\+\+S\+T\+R\+U\+C\+T()}} -\/ Generates the double ended queue structure specialized to a type
-\item {\itshape \hyperlink{deque_8h_a20e8006e6767304fca356f057bc319f4}{P\+R\+O\+T\+O\+T\+Y\+P\+E\+\_\+\+D\+E\+Q\+U\+E()}} -\/ Generates the function prototypes for the functions that are generated by the {\itshape \hyperlink{deque_8h_a283e81072037376be2a17b25b1eb1601}{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+Q\+U\+E()}} macro
-\item {\itshape \hyperlink{deque_8h_a283e81072037376be2a17b25b1eb1601}{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+Q\+U\+E()}} -\/ Generates functions for use with the structure generated by {\itshape \hyperlink{deque_8h_ad1734634a88d702478c08e26e39dc7b8}{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+Q\+U\+E\+\_\+\+S\+T\+R\+U\+C\+T()}}.
+\item {\itshape \hyperlink{deque_8h_a091cfc1289538b13036bcd36d12a3c01}{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+Q\+U\+E\+\_\+\+S\+T\+R\+U\+C\+T()}} -\/ Generates the double ended queue structure specialized to a type
+\item {\itshape \hyperlink{deque_8h_af9dc10c0d5c775afe3053629e39f8c36}{P\+R\+O\+T\+O\+T\+Y\+P\+E\+\_\+\+D\+E\+Q\+U\+E()}} -\/ Generates the function prototypes for the functions that are generated by the {\itshape \hyperlink{deque_8h_a71fbe309fa88eb8d294b141f33d81233}{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+Q\+U\+E()}} macro
+\item {\itshape \hyperlink{deque_8h_a71fbe309fa88eb8d294b141f33d81233}{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+Q\+U\+E()}} -\/ Generates functions for use with the structure generated by {\itshape \hyperlink{deque_8h_a091cfc1289538b13036bcd36d12a3c01}{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+Q\+U\+E\+\_\+\+S\+T\+R\+U\+C\+T()}}.
 \begin{DoxyItemize}
-\item N\+O\+TE\+: The following functions were generated with a call to {\itshape \hyperlink{deque_8h_a283e81072037376be2a17b25b1eb1601}{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+Q\+U\+E(\+Example, Type)}}. Each function is named after the contents passed into the first argment of this macro (in this case {\itshape \hyperlink{structExample}{Example}}).
-\item {\itshape \hyperlink{deque_8h_ae0c6f52c89e2b087e19e3062186144da}{new\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_a4a210705b6f22fe97b7033bb8854a4d6}{new\+\_\+destructable\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_ad9998ed1cadaff66c209e8b666185f70}{destroy\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_ab8ed3578aa5708a09831653caaa88b8a}{empty\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_a43fb8662cb9960b573bc2368b27a915c}{is\+\_\+empty\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_ab751404fe5166cbc70dc8093b5167839}{length\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_a0214e3a819ca3e1ec44d2f60d7c28f7b}{as\+\_\+array\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_a582c40f070af171e4c98455d7d6fd305}{apply\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_a7ef7f1f62eb4aa5565c04013ac376433}{push\+\_\+front\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_a63a0566b60e881121b5ba029a25cb9ae}{push\+\_\+back\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_a9fe851644b8743ed3e189e2b7872641a}{pop\+\_\+front\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_aa3a49a1ed1aac021037fe94820ed8c95}{pop\+\_\+back\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_ab65f67206d60592e7a12d4ed1c833cc1}{peek\+\_\+front\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_a17ee221f1873599af8849e47af1d490c}{peek\+\_\+back\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_a2f5457e6575eb38d59b7504770ca247e}{update\+\_\+front\+\_\+\+Example()}} 
-\item {\itshape \hyperlink{deque_8h_a0705ac52e0952213b9f1ce7f80bf977e}{update\+\_\+back\+\_\+\+Example()}} 
+\item N\+O\+TE\+: The following functions were generated with a call to {\itshape \hyperlink{deque_8h_a71fbe309fa88eb8d294b141f33d81233}{I\+M\+P\+L\+E\+M\+E\+N\+T\+\_\+\+D\+E\+Q\+U\+E(\+Example, Type)}}. Each function is named after the contents passed into the first argment of this macro (in this case {\itshape \hyperlink{structExample}{Example}}).
+\item {\itshape \hyperlink{group__DEQUE_gae0c6f52c89e2b087e19e3062186144da}{new\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_ga4a210705b6f22fe97b7033bb8854a4d6}{new\+\_\+destructable\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_gad9998ed1cadaff66c209e8b666185f70}{destroy\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_gab8ed3578aa5708a09831653caaa88b8a}{empty\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_ga43fb8662cb9960b573bc2368b27a915c}{is\+\_\+empty\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_gab751404fe5166cbc70dc8093b5167839}{length\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_ga0214e3a819ca3e1ec44d2f60d7c28f7b}{as\+\_\+array\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_ga582c40f070af171e4c98455d7d6fd305}{apply\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_ga7ef7f1f62eb4aa5565c04013ac376433}{push\+\_\+front\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_ga63a0566b60e881121b5ba029a25cb9ae}{push\+\_\+back\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_ga9fe851644b8743ed3e189e2b7872641a}{pop\+\_\+front\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_gaa3a49a1ed1aac021037fe94820ed8c95}{pop\+\_\+back\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_gab65f67206d60592e7a12d4ed1c833cc1}{peek\+\_\+front\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_ga17ee221f1873599af8849e47af1d490c}{peek\+\_\+back\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_ga2f5457e6575eb38d59b7504770ca247e}{update\+\_\+front\+\_\+\+Example()}} 
+\item {\itshape \hyperlink{group__DEQUE_ga0705ac52e0952213b9f1ce7f80bf977e}{update\+\_\+back\+\_\+\+Example()}} 
 \end{DoxyItemize}
 \end{DoxyItemize}
 \end{DoxyItemize}
@@ -324,14 +324,14 @@ There is an automated testing script written for this project in run\+\_\+tests.
 Partial credit will be given for incomplete programs. However, a program that cannot compile will get 0 points. The feature tests are placed into multiple tiers of completeness. The output to standard out from your code must match our output exactly, except for whitespace, for the next tier of grading to be accessible. This is due to reliance of previous tiers in subsequent tier tests. If we cannot run your code in one tier then it becomes far more difficult test later tiers. The point breakdown for features is below\+:
 
 \tabulinesep=1mm
-\begin{longtabu} spread 0pt [c]{*2{|X[-1]}|}
+\begin{longtabu} spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\rowcolor{\tableheadbgcolor}{\bf Description  }&{\bf Score   }\\\cline{1-2}
+\rowcolor{\tableheadbgcolor}\textbf{ Description  }&\textbf{ Score   }\\\cline{1-2}
 \endfirsthead
 \hline
 \endfoot
 \hline
-\rowcolor{\tableheadbgcolor}{\bf Description  }&{\bf Score   }\\\cline{1-2}
+\rowcolor{\tableheadbgcolor}\textbf{ Description  }&\textbf{ Score   }\\\cline{1-2}
 \endhead
 
 \begin{DoxyItemize}

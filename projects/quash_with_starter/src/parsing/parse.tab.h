@@ -1,8 +1,9 @@
-/* A Bison parser, made by GNU Bison 3.0.4.  */
+/* A Bison parser, made by GNU Bison 3.5.1.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,6 +31,9 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
+
 #ifndef YY_YY_SRC_PARSING_PARSE_TAB_H_INCLUDED
 # define YY_YY_SRC_PARSING_PARSE_TAB_H_INCLUDED
 /* Debug traces.  */
@@ -40,7 +44,7 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 22 "src/parsing/parse.y" /* yacc.c:1909  */
+#line 22 "src/parsing/parse.y"
 
 #include <stdbool.h>
 
@@ -49,7 +53,7 @@ extern int yydebug;
 #include "parse.tab.h"
 #include "memory_pool.h"
 
-#line 53 "src/parsing/parse.tab.h" /* yacc.c:1909  */
+#line 57 "src/parsing/parse.tab.h"
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -81,10 +85,9 @@ extern int yydebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-
 union YYSTYPE
 {
-#line 31 "src/parsing/parse.y" /* yacc.c:1909  */
+#line 31 "src/parsing/parse.y"
 
   int integer;
   char* str;
@@ -95,9 +98,9 @@ union YYSTYPE
   Cmds cmd_list;
   Redirect redirect;
 
-#line 99 "src/parsing/parse.tab.h" /* yacc.c:1909  */
-};
+#line 102 "src/parsing/parse.tab.h"
 
+};
 typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

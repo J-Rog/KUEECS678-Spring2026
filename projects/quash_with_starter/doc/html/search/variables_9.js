@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kill',['kill',['../unionCommand.html#a19c5261961f2f9a7fcbf9f5379d3f98a',1,'Command']]]
+  ['out',['out',['../structRedirect.html#a9d5efc0a96275e13eba0e71450771952',1,'Redirect']]]
 ];

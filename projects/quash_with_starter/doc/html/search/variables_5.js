@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['flags',['flags',['../structCommandHolder.html#acb381d6ab29bc574dc1ff452adc7847a',1,'CommandHolder']]],
-  ['front',['front',['../structExample.html#ad28f26e5c53b98255d98b65e82fae766',1,'Example']]]
+  ['generic',['generic',['../unionCommand.html#a22a7dad0e3935c261a1643c8c5ea46aa',1,'Command']]]
 ];

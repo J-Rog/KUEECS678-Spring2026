@@ -1,4 +1,4 @@
-> # EECS 678 - Project 1 - Quash Shell
+> # EECS 678 - Quash Shell
 
 ## Introduction
 
