@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Optional - Adding a System Call to an xv6 Kernel</title>
+<style type="text/css">
+.auto-style1 {
+        font-size: xx-large;
+}
+.auto-style2 {
+        font-size: large;
+}
+.auto-style3 {
+        margin-top: 0;
+        margin-bottom: 0;
+}
+.auto-style5 {
+        margin-top: 0;
+        margin-bottom: 4px;
+}
+</style>
+</head>
+
+<body>
+
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style1">
+                <b style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: x-large; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: -webkit-left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(204, 204, 204);">
+                 Adding a System Call to an xv6 Kernel</b></td>
+        </tr>
+</table>
+<p><font color="black" size="+1" style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <br/><br/>
+        In this lab, we will add a system call to a kernel source 
+        directory. Today you will create our own xv6 image, Then, you will be modifying 
+        the kernel source directory by adding a new system call to 
+        the kernel. Then you will build and install the modified kernel 
+        on this image. Finally, we will test the system call.</p>
+<br />
+<h3 style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+Table of Contents:</h3>
+<ul>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style3">
+        <a href="#Creating image">Cloning your image</a></p>
+        </li><br/>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style5">
+        <a href="#Boot image">Boot your image</a></p>
+        </li><br/>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style5">
+        <a href="#System Call">Adding a System Call to the xv6 Kernel</a>
+        </p>
+        </li><br/>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style5">
+        <a href="#Building kernel">Building and installing your kernel</a></p>
+        </li><br/>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style5">
+        <a href="#Testing">Testing the System Call</a></p>
+        </li><br/>
+        <li>
+        <p style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" class="auto-style5">
+        <a href="#Other command">Other important commands</a></p>
+        </li><br/>
+</ul>
+<p>&nbsp;</p>
+
+<table style="width: 100%">
+        <tr></tr>
+                <td bgcolor="#C0C0C0" class="auto-style2"><strong>
+                <a name="Installing QEMU"></a>Installing QEMU (No need for this step, if you already have QEMU functional from lab 2)</strong></td>
+        </tr>
+</table>
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+<p>For today's lab, you will be directly working on your machine. We won't be needing VirtualBox or PuTTY for today's lab. You can use the host OS of your machine. It can either be Linux, Windows or MacOS.</p>
+<ol>
+        <li>Now, go to <a href="https://www.qemu.org">QEMU's website (qemu.org)</a></li>
+        <li>Then, go to the <a href="https://www.qemu.org/download/">Downloads</a> page and follow the instructions for your specific Operating System. Download QEMU.</li>
+        <li>Open the downloaded QEMU installer and install QEMU.</li>
+        <li>Add the installed QEMU directory to your System's PATH environment variable.</li>
+</ol>
+<p>We will be using QEMU from the command prompt (Windows) or terminal (Linux, MacOS). The commands are the same for the different platforms.</p>
+
+<p>&nbsp;</p>
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style2"><strong>
+                <a name="Creating image"></a>Cloning Your Image</strong></td>
+        </tr>
+</table>
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+
+<ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" type="2">
+       <li>
+                Open up the terminal and navigate to where you store your OS assignments             
+        </li>
+        &nbsp;
+        <li>
+                Then, clone the image using the following command
+                <br/><br/><b>&gt; git clone https://github.com/mit-pdos/xv6-public.git <span class="Apple-converted-space">&nbsp;</span></b><br /><br/>
+                Then change directory using the command:
+              
+                <br/><br/><b>&gt; cd xv6-public <span class="Apple-converted-space">&nbsp;</span></b><br /><br/>
+
+                Then display the contents of the direcotry using the command 
+
+                <br/><br/><b>&gt; ls <span class="Apple-converted-space">&nbsp;</span></b><br /><br/>
+                <font style="color: red;">(Screenshot)</font>
+        </li>
+</ol>
+<p>&nbsp;</p>
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style2"><strong><a name="Boot image">
+                </a>Boot Your Image</strong></td>
+        </tr>
+</table>
+
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+</span><ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li>The basic command for booting into your image is:<br />
+        <br />
+        <b>&gt; make qemu <span class="Apple-converted-space">&nbsp;</span></b><br />
+        <br />
+        This example boots into the image 'fs.img' using qemu's i386 VM<b><br /><b><br />
+
+        <font style="color: red;">(Screenshot)</font>
+        </li>
+</ol>
+<p>&nbsp;</p>
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style2">
+                <strong>
+                        <a name="System Call"></a>Adding a System Call to the xv6 Kernel
+                </strong>
+                </td>
+        </tr>
+        </table>
+        <span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+        
+      We will be modifying the sysproc.c, defs.h, syscall.h, syscall.c, user.h, and usys.S files
+
+
+        To add a system call to the kernel source directory carry out the following steps: 
+        </span>
+        <ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" type="2">
+        <li>
+                We first begin by modifying the sysproc.c file. Open it using 
+
+                <pre style="margin-left: 40px;">vim sysproc.c +</pre>
+                
+                and add the following bit of code to the end of the file 
+<pre style="margin-left: 40px;">               int
+                sys_hello(void)
+                {
+                  cprintf("hello_world\n");
+                  return 0;
+                }
+                </pre>
+
+                <font style="color: red;">(Screenshot)</font>
+        </li>
+        <br />
+        <li>
+                Next exit sysproc.c using :wq and enter defs.h using 
+                <pre style="margin-left: 40px;">vim defs.h</pre>
+                
+                locate the comment that says proc.c and at the bottom of the table add 
+
+                <pre style="margin-left: 40px;">int         sys_hello(void);</pre>
+                <font style="color: red;">(Screenshot)</font>
+                </li>
+        <li>
+          Exit defs.h :wq and navigate to syscall.h
+
+                <pre style="margin-left: 40px;">vim syscall.h</pre>
+                
+                At the bottom of the file add the line 
+
+                <pre style="margin-left: 40px;">#define SYS_hello   22</pre>
+                <font style="color: red;">(Screenshot)</font>
+                </li>
+
+        <li>
+          Next we register the new syscall in the syscall dispatcher. Open syscall.c 
+
+                <pre style="margin-left: 40px;">vim syscall.c</pre>
+                
+                Find where the other system calls are, they are labeled with the keyword extern and add our own system call
+
+                <pre style="margin-left: 40px;">extern int sys_hello(void);</pre>
+
+                <font style="color: red;">(Screenshot)</font>
+<br>
+              We also need to add our entry so navigate down to the sys_call table under the extern declarations and add our system call in the table using
+
+                <pre style="margin-left: 40px;">[SYS_hello]   sys_hello,</pre>
+    
+                <font style="color: red;">(Screenshot)</font>
+
+
+
+                </li>
+        <li>
+          Exit syscall.c using :wq and navigate to user.h
+
+                <pre style="margin-left: 40px;">vim syscall.h</pre>
+                
+                In there we need to add our system call to a table that users in user space have access to 
+
+                <pre style="margin-left: 40px;">int hello(void);</pre>
+                <font style="color: red;">(Screenshot)</font>
+                </li>
+
+        <li>
+          Finally exit user.h  and enter usys.S
+
+                <pre style="margin-left: 40px;">vim usys.S +</pre>
+                
+                At the bottom add the following command for the assembly stub
+
+                <pre style="margin-left: 40px;">SYSCALL(hello)</pre>
+                <font style="color: red;">(Screenshot)</font>
+                </li>
+
+<br>
+          With this last modification you've successfully completed all the steps necessary to change the kernel of an operating system. Next lets look at how to modify the kernel compilation so your changes show up in the xv6. 
+
+        </ol>
+
+<table style="width: 100%">
+        <tr>
+                <td bgcolor="#C0C0C0" class="auto-style2"><strong>
+                <a name="Building kernel"></a>Recompiling Your Kernel</strong></td>
+        </tr>
+</table>
+<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+Building and installing the kernel on our Debian system is easy. Follow these
+simple instructions:</span><ol style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" type="2">
+        <li>
+                After completing themodifications to the kernel we now need to call the sys call in user space.
+
+                Write the following hello.c program 
+                <pre style="margin-left: 40px;">
+                #include "types.h"
+                #include "stat.h"
+                #include "user.h"
+
+                int
+                main(void)
+                {
+                  hello();
+                  exit();
+                }               
+                </revision></pre>
+        </li>
+        &nbsp;
+        <li>
+                Next we need to add it to the MakeFile, in the UPROGS section add 
+
+                <pre style="margin-left: 40px;">	_hello\</pre>
+                
+                <font style="color: red;">(Screenshot)</font>
+ 
+
+                <pre style="margin-left: 40px;"></pre>
+        </li>
+       &nbsp;
+       <li>
+                To build the kernel, run the command:<br />
+        <br />
+        <b>&gt; make <span class="Apple-converted-space">&nbsp;</span></b><br />
+
+        <br /><font style="color: red;">(Screenshot)</font>
+  <br/>
+  <br/>
+  &nbsp;
+       </li>
+       <li>
+  When the command completes, the kernel has recompiled. Reenter qemu using <br/><br/>
+
+        <b>&gt; make qemu <span class="Apple-converted-space">&nbsp;</span></b><br />
+        <br />
+        </li> 
+       <li>
+                Finally to see if your modificationshave worked, run the command:<br />
+        <br />
+        <b>&gt; hello <span class="Apple-converted-space">&nbsp;</span></b><br />
+
+        <br /><font style="color: red;">(Screenshot)</font></br></br>
+
+        You should see your message appear in xv6 and in your terminal. 
+  <br/>
+  <br/>
+  &nbsp;
+
+
+</ol>
+
+
+<table style="width: 100%">
+    <tr>
+        <td bgcolor="#C0C0C0" class="auto-style2">
+            <strong><a name="Submission"></a>Submission Requirements</strong>
+        </td>
+    </tr>
+</table>
+
+<p>
+Each student must submit a <b>single report</b> documenting their work for this lab.
+The report must include a brief description of your process and <b>all required screenshots</b>
+indicated throughout this document.  
+Your grade for this lab is based entirely on this report and is worth <b>100 points</b>.
+</p>
+
+<p>&nbsp;</p>
+<p><a href="/../index.html">&lt; Back to the Lab Home Page</a></p>
+
+</body>
+
+</html>
