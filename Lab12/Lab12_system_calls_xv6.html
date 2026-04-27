@@ -74,18 +74,17 @@ Table of Contents:</h3>
 <table style="width: 100%">
         <tr></tr>
                 <td bgcolor="#C0C0C0" class="auto-style2"><strong>
-                <a name="Installing QEMU"></a>Installing QEMU (No need for this step, if you already have QEMU functional from lab 2)</strong></td>
+                <a name="Installing QEMU"></a>Installing QEMU </strong></td>
         </tr>
 </table>
 <span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
-<p>For today's lab, you will be directly working on your machine. We won't be needing VirtualBox or PuTTY for today's lab. You can use the host OS of your machine. It can either be Linux, Windows or MacOS.</p>
+<p>For today's lab, you will be using the QEMU VM which you can install on your local machine. It can either be Linux, Windows or MacOS. It is also available on the lab machines. </p>
 <ol>
         <li>Now, go to <a href="https://www.qemu.org">QEMU's website (qemu.org)</a></li>
         <li>Then, go to the <a href="https://www.qemu.org/download/">Downloads</a> page and follow the instructions for your specific Operating System. Download QEMU.</li>
         <li>Open the downloaded QEMU installer and install QEMU.</li>
         <li>Add the installed QEMU directory to your System's PATH environment variable.</li>
 </ol>
-<p>We will be using QEMU from the command prompt (Windows) or terminal (Linux, MacOS). The commands are the same for the different platforms.</p>
 
 <p>&nbsp;</p>
 <table style="width: 100%">
@@ -111,6 +110,19 @@ Table of Contents:</h3>
                 Then display the contents of the direcotry using the command 
 
                 <br/><br/><b>&gt; ls <span class="Apple-converted-space">&nbsp;</span></b><br /><br/>
+                <font style="color: red;">(Screenshot)</font>
+        </li>
+
+        &nbsp;
+        <li>
+                Next we need to modify the Makefile first enter the file using 
+                <br/><br/><b>&gt;  vim Makefile<span class="Apple-converted-space">&nbsp;</span></b><br /><br/>
+                Then modify the file using the command. To enter a command hit esc until you enter Normal mode in vim then type : to enter command line mode. 
+              
+                <br/><br/><b>  :%s/-Werror//g <span class="Apple-converted-space">&nbsp;</span></b><br /><br/>
+
+                Then display the contents of the direcotry using the command </br></br>
+
                 <font style="color: red;">(Screenshot)</font>
         </li>
 </ol>
@@ -211,7 +223,7 @@ Table of Contents:</h3>
         <li>
           Exit syscall.c using :wq and navigate to user.h
 
-                <pre style="margin-left: 40px;">vim syscall.h</pre>
+                <pre style="margin-left: 40px;">vim user.h</pre>
                 
                 In there we need to add our system call to a table that users in user space have access to 
 
@@ -294,9 +306,10 @@ simple instructions:</span><ol style="color: rgb(0, 0, 0); font-family: 'Times N
         <br />
         <b>&gt; hello <span class="Apple-converted-space">&nbsp;</span></b><br />
 
-        <br /><font style="color: red;">(Screenshot)</font></br></br>
 
-        You should see your message appear in xv6 and in your terminal. 
+        <br />You should see your message appear in xv6 and in your terminal. <br />
+
+        <br /><font style="color: red;">(Screenshot)</font>
   <br/>
   <br/>
   &nbsp;
@@ -321,7 +334,7 @@ Your grade for this lab is based entirely on this report and is worth <b>100 poi
 </p>
 
 <p>&nbsp;</p>
-<p><a href="/../index.html">&lt; Back to the Lab Home Page</a></p>
+<p><a href="https://j-rog.github.io/KUEECS678-Spring2026/">&lt; Back to the Lab Home Page</a></p>
 
 </body>
 
